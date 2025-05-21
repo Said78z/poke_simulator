@@ -1,0 +1,27 @@
+nom,type,hp,attaque,puissance
+Salamèche,Feu,39,Flammèche,70
+Reptincel,Feu,58,Lance-Flammes,90
+Dracaufeu,Feu,78,Déflagration,110
+Carapuce,Eau,44,Pistolet à O,65
+Carabaffe,Eau,59,Surf,85
+Tortank,Eau,79,Hydrocanon,120
+Bulbizarre,Plante/Poison,45,Fouet Lianes,60
+Herbizarre,Plante/Poison,60,Tranch'Herbe,80
+Florizarre,Plante/Poison,80,Lance-Soleil,120
+Pikachu,Électrik,35,Éclair,55
+Raichu,Électrik,60,Tonnerre,90
+Roucool,Normal/Vol,40,Tornade,45
+Roucoups,Normal/Vol,63,Cyclone,70
+Roucarnage,Normal/Vol,83,Aéropique,90
+Ptitard,Eau,40,Écume,40
+Têtarte,Eau,65,Bulles d'O,65
+Tartard,Eau/Combat,90,Hydroqueue,85
+Staross,Eau/Psy,60,Hydrocanon,90
+Leviator,Eau/Vol,95,Cascade,100
+Racaillou,Roche/Sol,40,Jet-Pierres,50
+Onix,Roche/Sol,35,Tomberoche,65
+Saquedeneu,Plante,65,Fouet Lianes,45
+Empiflor,Plante/Poison,75,Mega-Sangsue,80
+Dracolosse,Dragon/Vol,91,Draco-Météore,130
+Ectoplasma,Spectre/Poison,60,Ball'Ombre,80
+Spectrum,Spectre/Poison,45,Léchouille,65

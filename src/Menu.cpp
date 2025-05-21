@@ -303,9 +303,8 @@ void Menu::executerOption(int choix) {
             interagirAvecEntite();
             break;
         case 8:
-            sauvegarderDonneesJoueur();
-            std::cout << "Au revoir !" << std::endl;
-            exit(0);
+            // La gestion de la sortie est maintenant dans demarrer()
+            // Ne rien faire ici
             break;
         default:
             std::cout << "Option invalide. Veuillez réessayer." << std::endl;
@@ -567,21 +566,39 @@ void Menu::demarrer() {
     afficherMenuInitial();
     
     // Boucle principale du menu
-    int choix;
-    do {
+    int choix = 0;
+    bool continuer = true;
+    
+    while (continuer) {
+        // Afficher le menu et récupérer le choix de l'utilisateur
         afficherMenuPrincipal();
-        std::cin >> choix;
         
-        // Gérer les erreurs d'entrée
-        if (std::cin.fail()) {
+        // Récupérer l'entrée de l'utilisateur
+        if (!(std::cin >> choix)) {
+            // En cas d'erreur de lecture, réinitialiser le flux d'entrée
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            choix = -1;
+            std::cout << "Entrée invalide. Veuillez entrer un nombre." << std::endl;
+            continue; // Revenir au début de la boucle
         }
         
-        executerOption(choix);
+        // Vider le reste du buffer après avoir lu le choix
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         
-    } while (choix != 8);
+        // Gérer le choix de quitter
+        if (choix == 8) {
+            sauvegarderDonneesJoueur();
+            std::cout << "Au revoir !" << std::endl;
+            continuer = false; // Terminer la boucle proprement
+        } else {
+            // Exécuter l'option choisie
+            executerOption(choix);
+            
+            // Pause optionnelle après chaque action pour donner le temps à l'utilisateur de lire
+            std::cout << "\nAppuyez sur Entrée pour continuer...";
+            std::cin.get();
+        }
+    }
 }
 
 void Menu::sauvegarderDonneesJoueur() {

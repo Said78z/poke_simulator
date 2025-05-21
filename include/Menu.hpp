@@ -19,6 +19,8 @@ public:
     
     // Initialisation du jeu
     void chargerDonnees();
+    void chargerDonneesPokemon();
+    void chargerDonneesJoueur();
     void sauvegarderDonneesJoueur();
     void nouvellePartie();
     void afficherMenuInitial();

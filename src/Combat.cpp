@@ -2,6 +2,7 @@
 #include "Entraineur.hpp"
 #include "MaitrePokemon.hpp"
 #include <iostream>
+#include <limits>
 
 Combat::Combat(std::shared_ptr<Entraineur> entraineur1, std::shared_ptr<Entraineur> entraineur2)
     : entraineur1(entraineur1), entraineur2(entraineur2), indexPokemon1(0), indexPokemon2(0) {}
@@ -10,16 +11,36 @@ void Combat::demarrer() {
     std::cout << "\nCOMBAT : " << entraineur1->getNom() << " VS " << entraineur2->getNom() << std::endl;
     std::cout << "----------------------------------------------" << std::endl;
 
+    // Vérifier que les deux entraîneurs ont des Pokémon
+    if (entraineur1->getNombrePokemon() == 0 || entraineur2->getNombrePokemon() == 0) {
+        std::cout << "ERREUR : Un des entraîneurs n'a pas de Pokémon ! Combat annulé." << std::endl;
+        return;
+    }
+
     bool victoire = false;
     bool defaite = false;
 
     // Continuer le combat tant qu'un entraîneur a des Pokémon valides
     while (!victoire && !defaite) {
+        // Vérifier que les indices sont valides
+        if (indexPokemon1 >= static_cast<int>(entraineur1->getNombrePokemon()) || 
+            indexPokemon2 >= static_cast<int>(entraineur2->getNombrePokemon())) {
+            std::cout << "ERREUR : Indice de Pokémon invalide ! Combat annulé." << std::endl;
+            return;
+        }
+        
         // Afficher l'état des Pokémon actuels
         auto pokemon1 = entraineur1->getPokemon(indexPokemon1);
         auto pokemon2 = entraineur2->getPokemon(indexPokemon2);
 
+        // Vérifier que les pointeurs sont valides
+        if (!pokemon1 || !pokemon2) {
+            std::cout << "ERREUR : Pokémon invalide ! Combat annulé." << std::endl;
+            return;
+        }
+
         std::cout << "\nPokémon actifs:" << std::endl;
+        
         std::cout << entraineur1->getNom() << ": ";
         pokemon1->afficher();
         std::cout << std::endl;
@@ -130,4 +151,17 @@ void Combat::afficherResultat(bool victoire) {
         std::cout << "DÉFAITE pour " << entraineur1->getNom() << " !" << std::endl;
         std::cout << entraineur2->getNom() << " remporte le combat." << std::endl;
     }
+    
+    // Méthode alternative pour la pause - demander un nombre
+    std::cout << "\nAppuyez sur '1' puis Entrée pour revenir au menu principal: ";
+    
+    // Nettoyer et réinitialiser le flux d'entrée
+    std::cin.clear();
+    
+    // Variable pour stocker l'entrée
+    int continuer;
+    std::cin >> continuer;
+    
+    // Vider le buffer après la lecture
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 } 
